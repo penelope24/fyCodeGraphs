@@ -1,4 +1,4 @@
-package fy.cfg.solve;
+package fy.cfg.parse;
 
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.StaticJavaParser;
@@ -7,7 +7,6 @@ import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.PackageDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.type.*;
-import com.sun.deploy.util.StringUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -1,16 +1,14 @@
 package fy.cfg.visitor;
 
 import com.github.javaparser.ast.CompilationUnit;
-import com.github.javaparser.ast.ImportDeclaration;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.PackageDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.type.*;
-import com.sun.deploy.util.StringUtils;
-import fy.cfg.solve.TypeSolver;
-import fy.cfg.structure.Var;
-import javassist.compiler.ast.Variable;
+import fy.cfg.parse.TypeSolver;
+import fy.cfg.structure.DFVarNode;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 
@@ -19,12 +17,14 @@ public class GlobalVarVisitor {
     private HashMap<String, Set<String>> pkg2types;
     private List<String> allImports;
     private String pkgInfo;
-    private Set<Var> allFields;
+    private Set<DFVarNode> allFields;
     private CompilationUnit cu;
 
     public GlobalVarVisitor(HashMap<String, Set<String>> pkg2types, CompilationUnit cu) {
         this.pkg2types = pkg2types;
         this.cu = cu;
+        allImports = new ArrayList<>();
+        pkgInfo = null;
         init();
     }
 
@@ -35,7 +35,7 @@ public class GlobalVarVisitor {
         });
         // parse package
         boolean is_pkg_present = cu.findFirst(PackageDeclaration.class).isPresent();
-        String pkgInfo = is_pkg_present ? cu.findFirst(PackageDeclaration.class).get().getNameAsString() : "";
+        pkgInfo = is_pkg_present ? cu.findFirst(PackageDeclaration.class).get().getNameAsString() : "";
     }
 
     public void analyseFieldTypes() {
@@ -48,10 +48,11 @@ public class GlobalVarVisitor {
         });
     }
 
-    public void analyseSingleVar(VariableDeclarator variable, Set<Var> allFields) {
+    public void analyseSingleVar(VariableDeclarator variable, Set<DFVarNode> allFields) {
         String name = variable.getNameAsString();
         Type type = variable.getType();
         String typeName = parseVarType(type);
+        allFields.add(new DFVarNode(name, typeName));
     }
 
     public String parseVarType (Type type) {
@@ -112,5 +113,22 @@ public class GlobalVarVisitor {
             return StringUtils.join(typeStr, ";");
         }
         return "";
+    }
+
+
+    public Set<String> getCurrentPackageAllTypes() {
+        return this.pkg2types.get(pkgInfo);
+    }
+
+    public List<String> getAllImports() {
+        return allImports;
+    }
+
+    public Set<DFVarNode> getAllFields() {
+        return allFields;
+    }
+
+    public String getPackageStr() {
+        return pkgInfo;
     }
 }
