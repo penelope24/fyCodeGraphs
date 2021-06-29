@@ -1,5 +1,8 @@
 package fy.cfg.parse;
 
+import fy.cfg.structure.EdgeTypes;
+import fy.cfg.structure.GraphEdge;
+import fy.cfg.structure.GraphNode;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
@@ -7,9 +10,6 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.stmt.*;
-import fy.cfg.structure.EdgeTypes;
-import fy.cfg.structure.GraphEdge;
-import fy.cfg.structure.GraphNode;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -47,12 +47,12 @@ public class CFGCreator {
                     return allMethodsRootNode; //专门针对于匿名对象 匿名对象的方法不处理
                 }
             }
-//            if (methodDeclaration.getDeclarationAsString(false,false,true).equals("boolean equals(Object obj)")){
-//                System.out.println("daole");
-//            }
-//            System.out.println("********************************************");
-//            System.out.println("当前正在生成CFG方法的名字：" + methodDeclaration.getDeclarationAsString(false,false,true));
-//            System.out.println("********************************************");
+            if (methodDeclaration.getDeclarationAsString(false,false,true).equals("boolean equals(Object obj)")){
+                System.out.println("daole");
+            }
+            System.out.println("********************************************");
+            System.out.println("当前正在生成CFG方法的名字：" + methodDeclaration.getDeclarationAsString(false,false,true));
+            System.out.println("********************************************");
             //创建方法名节点
             GraphNode graphNode = new GraphNode();
             graphNode.setOriginalCodeStr(methodDeclaration.getDeclarationAsString(false, true, true));
@@ -60,16 +60,13 @@ public class CFGCreator {
             graphNode.setCodeLineNum(methodDeclaration.getBegin().isPresent()?methodDeclaration.getBegin().get().line:-1);
             allNodesMap.put(graphNode.getOriginalCodeStr()+":"+graphNode.getCodeLineNum(),graphNode);
 
-//            { // added lines
-//                //创建注解节点
-//                NodeList<AnnotationExpr> annotations = methodDeclaration.getAnnotations();
-//                node.clone();
-//                for(AnnotationExpr annotationExpr:annotations){
-//                    GraphNode tempNode = new GraphNode("@"+annotationExpr.getNameAsString(), "Annotation");
-//                    graphNode.addAdjacentPoint(tempNode);
-//                    graphNode.addEdg(new GraphEdge(EdgeTypes.CFG,graphNode,tempNode));
-//                    tempNode.setSimplifyCodeStr("@"+annotationExpr.getNameAsString());
-//                }
+            //创建注解节点
+//            NodeList<AnnotationExpr> annotations = methodDeclaration.getAnnotations();
+//            for(AnnotationExpr annotationExpr:annotations){
+//                GraphNode tempNode = new GraphNode("@"+annotationExpr.getNameAsString(), "Annotation");
+//                graphNode.addAdjacentPoint(tempNode);
+//                graphNode.addEdg(new GraphEdge(EdgeTypes.CFG,graphNode,tempNode));
+//                tempNode.setSimplifyCodeStr("@"+annotationExpr.getNameAsString());
 //            }
 
             Optional<BlockStmt> body = methodDeclaration.getBody();
@@ -193,7 +190,6 @@ public class CFGCreator {
                 }
 
                 if (tempIfStmt.getElseStmt().isPresent()) {
-                    Statement elseStmt = tempIfStmt.getElseStmt().get();
                     if (tempIfStmt.getElseStmt().get().isIfStmt()) {
                         tempIfStmt = tempIfStmt.getElseStmt().get().asIfStmt();
                         predecessor = graphNode;
@@ -374,8 +370,6 @@ public class CFGCreator {
             graphNode.addPreAdjacentPoints(tempNode);
             return graphNode;// 这个方法体才是最后的节点，也就是下一步的开始节点
         } else if (node instanceof SwitchStmt) {
-            //FIXME nested switch considered?
-            
             // 能够改变控制流的结构
             SwitchStmt switchStmt = ((SwitchStmt) node).asSwitchStmt();
             GraphNode graphNode = new GraphNode();

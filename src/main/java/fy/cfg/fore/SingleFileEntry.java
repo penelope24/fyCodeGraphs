@@ -7,7 +7,6 @@ import fy.FileUtils.DirTraveler;
 import fy.cfg.parse.TypeSolver;
 import fy.cfg.visitor.GlobalVarVisitor;
 import fy.cfg.visitor.MethodVisitor;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -49,10 +48,9 @@ public class SingleFileEntry {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        String project = "/Users/fy/Documents/code/java/RuntimeExceptionAnalysis";
-        String target = "/Users/fy/Documents/code/java/RuntimeExceptionAnalysis/GraphBuilder/src/main/java/cn/fan/" +
-                "graph/view/CFGPrinter.java";
-        String output = "/Users/fy/Documents/data/test_dots";
+        String project = "D:\\data\\fastjson";
+        String target = "D:\\data\\fastjson\\src\\main\\java\\com\\alibaba\\fastjson\\parser\\ParserConfig.java";
+        String output = "D:\\data\\test\\test";
         SingleFileEntry.gen(project, target, output);
     }
 }

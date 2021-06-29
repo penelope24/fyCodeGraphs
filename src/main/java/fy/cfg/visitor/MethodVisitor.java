@@ -48,7 +48,7 @@ public class MethodVisitor extends VoidVisitorAdapter<Void> {
                 // build ast
                 ASTCreater astCreater = new ASTCreater(cfgCreator.getAllNodesMap());
                 astCreater.buildMethodAST(n);
-                // analyse data flow
+                // analyse data flowCFGCreater
                 DFGCreater dfgCreater = new DFGCreater(cfgCreator.getAllNodesMap());
                 dfgCreater.buildMethodDFG(n);
                 // simplify node

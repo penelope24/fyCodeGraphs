@@ -198,19 +198,19 @@ public class GraphNode {
         return result;
     }
 
-    @Override
-    public String toString() {
-        return "GraphNode{" +
-                "originalCodeStr='" + originalCodeStr + '\'' +
-                ", opTypeStr='" + opTypeStr + '\'' +
-                ", simplifyCodeStr='" + simplifyCodeStr + '\'' +
-                ", codeLineNum=" + codeLineNum +
-                ", dotNum='" + dotNum + '\'' +
-                ", parentNode=" + parentNode +
-                ", adjacentPoints=" + adjacentPoints +
-                ", edgs=" + edgs +
-                ", preAdjacentPoints=" + preAdjacentPoints +
-                ", astRootNode=" + astRootNode +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "GraphNode{" +
+//                "originalCodeStr='" + originalCodeStr + '\'' +
+//                ", opTypeStr='" + opTypeStr + '\'' +
+//                ", simplifyCodeStr='" + simplifyCodeStr + '\'' +
+//                ", codeLineNum=" + codeLineNum +
+//                ", dotNum='" + dotNum + '\'' +
+//                ", parentNode=" + parentNode +
+//                ", adjacentPoints=" + adjacentPoints +
+//                ", edgs=" + edgs +
+//                ", preAdjacentPoints=" + preAdjacentPoints +
+//                ", astRootNode=" + astRootNode +
+//                '}';
+//    }
 }

@@ -878,7 +878,7 @@ public class DFGCreater {
             for(DFVarNode dfVarNode:parentDefVarMap){
                 if(dfVarNode.getVarName().equals(usedVarName)){
                     // 添加数据流的边
-                    this.allDFGEdgesList.add(new GraphEdge(EdgeTypes.DFG,dfVarNode.getNode(),node));
+                    this.allDFGEdgesList.add(new GraphEdge(EdgeTypes.DFG, dfVarNode.getNode(), node));
                 }
             }
         }
