@@ -1,4 +1,4 @@
-package fy.cfg.structure;
+package fy.structures;
 
 import com.github.javaparser.ast.Node;
 

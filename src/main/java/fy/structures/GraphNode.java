@@ -1,4 +1,4 @@
-package fy.cfg.structure;
+package fy.structures;
 
 import java.util.ArrayList;
 import java.util.Iterator;

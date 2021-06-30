@@ -1,8 +1,8 @@
 package fy.cfg.parse;
 
-import fy.cfg.structure.EdgeTypes;
-import fy.cfg.structure.GraphEdge;
-import fy.cfg.structure.GraphNode;
+import fy.structures.EdgeTypes;
+import fy.structures.GraphEdge;
+import fy.structures.GraphNode;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
@@ -46,9 +46,6 @@ public class CFGCreator {
                 if (!(methodDeclaration.getParentNode().get() instanceof TypeDeclaration)) {
                     return allMethodsRootNode; //专门针对于匿名对象 匿名对象的方法不处理
                 }
-            }
-            if (methodDeclaration.getDeclarationAsString(false,false,true).equals("boolean equals(Object obj)")){
-                System.out.println("daole");
             }
             System.out.println("********************************************");
             System.out.println("当前正在生成CFG方法的名字：" + methodDeclaration.getDeclarationAsString(false,false,true));

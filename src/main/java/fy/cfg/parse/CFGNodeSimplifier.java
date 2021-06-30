@@ -7,8 +7,8 @@ import com.github.javaparser.ast.body.*;
 import com.github.javaparser.ast.expr.*;
 import com.github.javaparser.ast.stmt.*;
 import com.github.javaparser.ast.type.*;
-import fy.cfg.structure.DFVarNode;
-import fy.cfg.structure.GraphNode;
+import fy.structures.DFVarNode;
+import fy.structures.GraphNode;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;

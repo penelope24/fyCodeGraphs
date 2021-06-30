@@ -6,10 +6,10 @@ import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.*;
 import com.github.javaparser.ast.expr.*;
 import com.github.javaparser.ast.stmt.*;
-import fy.cfg.structure.DFVarNode;
-import fy.cfg.structure.EdgeTypes;
-import fy.cfg.structure.GraphEdge;
-import fy.cfg.structure.GraphNode;
+import fy.structures.DFVarNode;
+import fy.structures.EdgeTypes;
+import fy.structures.GraphEdge;
+import fy.structures.GraphNode;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;

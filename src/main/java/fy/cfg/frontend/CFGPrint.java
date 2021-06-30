@@ -1,9 +1,9 @@
 package fy.cfg.frontend;
 
-import fy.cfg.structure.AstNode;
-import fy.cfg.structure.EdgeTypes;
-import fy.cfg.structure.GraphEdge;
-import fy.cfg.structure.GraphNode;
+import fy.structures.AstNode;
+import fy.structures.EdgeTypes;
+import fy.structures.GraphEdge;
+import fy.structures.GraphNode;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -13,7 +13,7 @@ import java.util.*;
 /**
  * 纯cfg+ast+dfg+ncs
  */
-public class CodePropertyGraphPrinter {
+public class CFGPrint {
 
     private String path; //打印文件到哪个目录下
     private StringBuilder str;
@@ -23,7 +23,7 @@ public class CodePropertyGraphPrinter {
     private Properties prop;
 
 
-    public CodePropertyGraphPrinter(String path, Set<GraphEdge> allDFGEdgesList, Properties graphProps) {
+    public CFGPrint(String path, Set<GraphEdge> allDFGEdgesList, Properties graphProps) {
         this.path = path;
         str = new StringBuilder("digraph {");
         leafNodes = new ArrayList<>();

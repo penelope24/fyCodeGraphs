@@ -7,12 +7,12 @@ import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.type.*;
 import fy.cfg.parse.TypeSolver;
-import fy.cfg.structure.DFVarNode;
+import fy.structures.DFVarNode;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 
-public class GlobalVarVisitor {
+public class VarVisitor {
 
     private HashMap<String, Set<String>> pkg2types;
     private List<String> allImports;
@@ -20,7 +20,7 @@ public class GlobalVarVisitor {
     private Set<DFVarNode> allFields;
     private CompilationUnit cu;
 
-    public GlobalVarVisitor(HashMap<String, Set<String>> pkg2types, CompilationUnit cu) {
+    public VarVisitor(HashMap<String, Set<String>> pkg2types, CompilationUnit cu) {
         this.pkg2types = pkg2types;
         this.cu = cu;
         allImports = new ArrayList<>();

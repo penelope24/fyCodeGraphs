@@ -3,7 +3,6 @@ package fy.cfg.issues;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.MethodDeclaration;
-import fy.cfg.fore.SingleFileEntry;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;

@@ -1,4 +1,4 @@
-package fy.cfg.fore;
+package fy.cfg.entry;
 
 import java.io.*;
 import java.util.Properties;

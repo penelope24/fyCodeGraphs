@@ -1,4 +1,4 @@
-package fy.cfg.structure;
+package fy.structures;
 
 public enum EdgeTypes {
     CFG("red"),AST("black"),DFG("green"),NCS("blue"),CALL("yellow");

@@ -6,7 +6,7 @@ import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.stmt.CatchClause;
 import com.github.javaparser.metamodel.NodeMetaModel;
 import com.github.javaparser.metamodel.PropertyMetaModel;
-import fy.cfg.structure.AstNode;
+import fy.structures.AstNode;
 
 import java.util.ArrayList;
 import java.util.List;

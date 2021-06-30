@@ -3,27 +3,28 @@ package fy.cfg.visitor;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
+import fy.cfg.frontend.CFGPrint;
 import fy.cfg.parse.ASTCreater;
 import fy.cfg.parse.CFGCreator;
 import fy.cfg.parse.CFGNodeSimplifier;
 import fy.cfg.parse.DFGCreater;
-import fy.cfg.frontend.CFGPrint;
 import fy.structures.DFVarNode;
 import fy.structures.GraphNode;
+import org.jgrapht.graph.DirectedMultigraph;
 
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 import java.util.UUID;
 
-public class MethodVisitor extends VoidVisitorAdapter<Void> {
+public class MethodGraphCollect extends VoidVisitorAdapter<DirectedMultigraph> {
     private final Set<String> package2types;
     private final List<String> imports;
     private final Set<DFVarNode> fields;
     private final String dot_file_path;
     private Properties prop;
 
-    public MethodVisitor(VarVisitor varVisitor, String dot_file_path, Properties prop) {
+    public MethodGraphCollect(VarVisitor varVisitor, String dot_file_path, Properties prop) {
         this.package2types = varVisitor.getCurrentPackageAllTypes();
         this.imports = varVisitor.getAllImports();
         this.fields = varVisitor.getAllFields();
@@ -32,14 +33,13 @@ public class MethodVisitor extends VoidVisitorAdapter<Void> {
     }
 
     @Override
-    public void visit(MethodDeclaration n, Void arg ) {
+    public void visit(MethodDeclaration n, DirectedMultigraph g) {
         // parse properties
         // node.cfg & edge.cfg are always true
         // edge.ncs is only used when printing
         boolean node_simplify = Boolean.parseBoolean(prop.getProperty("node.simplify"));
         boolean node_ast = Boolean.parseBoolean(prop.getProperty("node.ast"));
         boolean edge_dataflow = Boolean.parseBoolean(prop.getProperty("edge.dataflow"));
-
 
         // filter out constructors
         if (n.getType() != null) {

@@ -6,8 +6,8 @@ import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.stmt.*;
-import fy.cfg.structure.AstNode;
-import fy.cfg.structure.GraphNode;
+import fy.structures.AstNode;
+import fy.structures.GraphNode;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
