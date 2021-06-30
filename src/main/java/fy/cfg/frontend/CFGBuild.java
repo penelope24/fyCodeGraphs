@@ -12,10 +12,10 @@ public class CFGBuild {
     private List<String> leafNodes;
     private Set<GraphEdge> allDFGEdgesList;
     private Properties prop;
-    private Graph<StmtVertex, StmtEdge> graph = new DirectedMultigraph(StmtEdge.class);
+    private DirectedMultigraph<StmtVertex, StmtEdge> graph = new DirectedMultigraph(StmtEdge.class);
 
-    public CFGBuild(List<String> leafNodes, Set<GraphEdge> allDFGEdgesList, Properties prop) {
-        this.leafNodes = leafNodes;
+    public CFGBuild(Set<GraphEdge> allDFGEdgesList, Properties prop) {
+        this.leafNodes = new ArrayList<>();
         this.allDFGEdgesList = allDFGEdgesList;
         this.prop = prop;
     }
@@ -87,11 +87,12 @@ public class CFGBuild {
 //        }
     }
 
-    public void buildGraph(GraphNode root) {
+    public DirectedMultigraph<StmtVertex, StmtEdge> buildGraph(GraphNode root) {
         boolean cfgFlag = Boolean.parseBoolean(prop.getProperty("node.cfg"));
         boolean astFlag = Boolean.parseBoolean(prop.getProperty("node.ast"));
         boolean dfgFlag = Boolean.parseBoolean(prop.getProperty("edge.dataflow"));
         boolean ncsFlag = Boolean.parseBoolean(prop.getProperty("edge.ncs"));
         BFS(root,cfgFlag,astFlag,dfgFlag,ncsFlag);
+        return graph;
     }
 }

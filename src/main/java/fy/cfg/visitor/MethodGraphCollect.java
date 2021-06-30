@@ -3,6 +3,7 @@ package fy.cfg.visitor;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
+import fy.cfg.frontend.CFGBuild;
 import fy.cfg.frontend.CFGPrint;
 import fy.cfg.parse.ASTCreater;
 import fy.cfg.parse.CFGCreator;
@@ -17,7 +18,7 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.UUID;
 
-public class MethodGraphCollect extends VoidVisitorAdapter<DirectedMultigraph> {
+public class MethodGraphCollect extends VoidVisitorAdapter<List<DirectedMultigraph>> {
     private final Set<String> package2types;
     private final List<String> imports;
     private final Set<DFVarNode> fields;
@@ -33,7 +34,7 @@ public class MethodGraphCollect extends VoidVisitorAdapter<DirectedMultigraph> {
     }
 
     @Override
-    public void visit(MethodDeclaration n, DirectedMultigraph g) {
+    public void visit(MethodDeclaration n, List<DirectedMultigraph> c) {
         // parse properties
         // node.cfg & edge.cfg are always true
         // edge.ncs is only used when printing
@@ -70,9 +71,8 @@ public class MethodGraphCollect extends VoidVisitorAdapter<DirectedMultigraph> {
 
                 for (GraphNode node : graphNodes) {
                     try {
-                        CFGPrint printer = new CFGPrint(dot_file_path, dfgCreater.getAllDFGEdgesList(), prop);
-                        printer.print(node, n.getNameAsString(), n.getParameters().size() +
-                                UUID.randomUUID().toString().substring(0, 4));
+                        CFGBuild builder = new CFGBuild(dfgCreater.getAllDFGEdgesList(), prop);
+                        c.add(builder.buildGraph(node));
                     } catch (Exception e) {
                         e.printStackTrace();
                         System.out.println("输出方法文件失败："+n.getNameAsString());
