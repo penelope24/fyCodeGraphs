@@ -134,7 +134,8 @@ public class DFGCreater {
             IfStmt tempIfStmt = ((IfStmt) node).asIfStmt(); //最开始的if节点
             Set<DFVarNode> copy = this.copy(parentDefVarMap);
             while (tempIfStmt != null) {
-                String ifLabel = "if (" + tempIfStmt.getCondition().toString() + ")";
+                String conditionStr = tempIfStmt.getCondition().toString().replaceAll("//\\s+\\n", "");
+                String ifLabel = "if (" + conditionStr + ")";
                 int ifLineNum = tempIfStmt.getBegin().isPresent() ? tempIfStmt.getBegin().get().line : -1;
                 GraphNode ifCfgNode = allCFGNodesMap.get(ifLabel + ":" + ifLineNum);
 

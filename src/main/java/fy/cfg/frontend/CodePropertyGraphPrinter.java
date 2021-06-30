@@ -1,4 +1,4 @@
-package fy.cfg.print;
+package fy.cfg.frontend;
 
 import fy.cfg.structure.AstNode;
 import fy.cfg.structure.EdgeTypes;
@@ -13,7 +13,7 @@ import java.util.*;
 /**
  * 纯cfg+ast+dfg+ncs
  */
-public class GraphPrint {
+public class CodePropertyGraphPrinter {
 
     private String path; //打印文件到哪个目录下
     private StringBuilder str;
@@ -23,7 +23,7 @@ public class GraphPrint {
     private Properties prop;
 
 
-    public GraphPrint(String path, Set<GraphEdge> allDFGEdgesList, Properties graphProps) {
+    public CodePropertyGraphPrinter(String path, Set<GraphEdge> allDFGEdgesList, Properties graphProps) {
         this.path = path;
         str = new StringBuilder("digraph {");
         leafNodes = new ArrayList<>();
@@ -170,7 +170,7 @@ public class GraphPrint {
         boolean cfgFlag = Boolean.parseBoolean(prop.getProperty("node.cfg"));
         boolean astFlag = Boolean.parseBoolean(prop.getProperty("node.ast"));
         boolean dfgFlag = Boolean.parseBoolean(prop.getProperty("edge.dataflow"));
-        boolean ncsFlag = Boolean.parseBoolean(prop.getProperty("node.ncs"));
+        boolean ncsFlag = Boolean.parseBoolean(prop.getProperty("edge.ncs"));
         BFS(root,cfgFlag,astFlag,dfgFlag,ncsFlag);
         if (!new File(path).exists() && new File(path).isDirectory()) {
             new File(path).mkdir();
