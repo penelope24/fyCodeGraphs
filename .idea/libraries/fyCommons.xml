@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="fyCommons">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../fyCommons/out/artifacts/fyCommons_jar/fyCommons.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
